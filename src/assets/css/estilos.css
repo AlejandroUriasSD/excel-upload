@@ -1,0 +1,291 @@
+html{
+    overflow: auto;
+}
+/* LOGIN */
+.fondoLogin{
+    background-image: url("../imgs/fondo_morado.png");
+    background-repeat: repeat;
+    overflow: none;
+    height: 100%;
+}
+.sombra{
+    background-color: rgba(31, 107, 42, 0.63);
+    height: 130px;
+    width: 250px;
+    border-radius: 40px;
+    box-shadow: 0px 0px 93px 250px rgba(0,0,0,0.28);
+}
+.logoBlanco{
+    position: relative;
+    height: 100px;
+    top: 10px;
+}
+.margenLogin{
+    /* margin-right: 10%; */
+    margin-top: 10%;
+}
+.logo{
+    height: 50px;
+    margin: 10px 10px;
+}
+.alertLogin{
+    width: 280px;
+    margin: auto;
+}
+
+
+
+
+
+
+
+
+
+
+/* MENU */
+.v-navigation-drawer--mini-variant .v-footer{
+    display: none
+}
+.iconMenu{
+    font-size: 22px;
+    color: #757575;
+}
+
+
+
+/* TABLA DE CITAS */
+th.text-start.sortable {
+    font-size: 14px;
+}
+
+
+
+/* LANDING COVID */
+.protocoloHeader{
+    padding: 20px;
+    text-align: left;
+    color: #616161;
+    
+}
+.protocoloHeader h3{
+    margin:20px 0px;
+    font-size: 20px;
+    line-height: 22px;
+}
+.v-expansion-panel-header{
+    font-size: 16px;
+    text-align: left;
+    color: #616161;
+    font-weight: 600;
+}
+.v-expansion-panel-content__wrap{
+    font-size: 16px;
+    text-align: left;
+    color: #333333;
+}
+.v-expansion-panel-header>:not(.v-expansion-panel-header__icon) {
+    flex: 0 1 auto!important;
+    margin-right: 15px!important;
+}
+.marginTcard{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+}
+.cardFAQ{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.FAQ{
+    width: 90%;
+    align-self: center;
+    margin-bottom: 15px;
+}
+.theme--light.v-expansion-panels .v-expansion-panel-header .v-expansion-panel-header__icon .v-icon {
+    font-size: 40px;
+    font-weight: 900;
+}
+.fuente{
+    color: #616161;
+}
+.FAQ>.v-item-group>.v-expansion-panel>.v-expansion-panel-content>.v-expansion-panel-content__wrap{
+    font-size: 14px;
+    text-align: left;
+    color: #333333;
+}
+.mb--7{
+    margin-bottom: -7px;
+}
+/* CITASCOVID */
+.btnWhatsapp{
+    color: #fafafa;
+    background-color: green;
+    font-size: 24px;
+    height: 30px;
+    width: 30px;
+    border-radius: 15px;
+}
+.btnWhatsapp:hover{
+    color: honeydew;
+    background-color: rgb(12, 114, 12);
+}
+.btnWhatsapp .icon-whatsapp{
+    position: relative;
+    right: 2px;
+    bottom: 3px;
+}
+.btnWhatsapp.desactivado{
+    background-color: grey;
+}
+/* Pago */
+.v-alert__border{
+    border-width: 8px;
+}
+.numTarjeta .v-input__control .v-input__control .v-input__icon i{
+    font-size: 10px;
+}
+.cardPago{
+    text-align: left;
+}
+.textRevisionCita{
+    margin: 12px 0px;
+    color: #118C86;
+    font-size: 30px;
+}
+.datos{
+    font-size: 16px;
+    color: #616161;
+    line-height: 21px;
+}
+.iconosPago{
+    color: #616161;
+    font-size: 20px;
+    position: relative;
+    bottom: 9px;
+}
+.v-application--is-ltr .v-list-item__action:first-child, .v-application--is-ltr .v-list-item__icon:first-child {
+    margin-right: 5px!important;
+}
+.pago h4{
+    color: #616161;
+}
+.pago h5{
+    font-size: 14px;
+    margin: 5px 0;
+}
+.relativo{
+    position: relative;
+}
+.tipoCard{
+    position: absolute;
+    right: 10px;
+    bottom: 21px;
+}
+.rowBanco{
+    height: 85px;
+}
+.pagoVerde{
+    background-color: #009e613f;
+    color: #333333;
+    height: auto;
+    margin-top: 10px;
+}
+.pagoVerde p{
+    font-size: 14px;
+    margin-bottom: 0px;
+}
+.pagoVerde p b{
+    font-size: 16px;
+    color: #616161;
+    line-height: 22px;
+    
+}
+.verdeDigital{
+    align-self: center;
+}
+.px-0{
+    padding: 0 12px;
+}
+.pl-0{
+    padding-left: 0px;
+}
+.pr-0{
+    padding-right: 0px;
+}
+.rowTerminos{
+    height: 40px;
+    margin-top: 0px;
+}
+.my-20{
+  margin: 20px 0;
+}
+.exitoso p{
+    font-size: 16px;
+    color: #616161;
+}
+.recortar{
+    color: #616161;
+    padding: 10px;
+    border: 2px solid;
+    border-style: dashed;
+    border-radius: 4px;
+    border-color: #359FDA;
+    text-align: center;
+    line-height: 24px;
+}
+.recortar small, .recortar p{
+    font-size: 14px;
+}
+.recortar span{
+    font-size: 30px;
+    font-weight: 600;
+    color: #118C86;
+}
+.verde{
+    color: #118C86
+}
+.pagado{
+    width: 100%;
+    margin: 10% 0px;
+}
+.check-exito{
+    color: #2CBB73;
+    text-align: center;
+    font-size: 80px;
+    margin: 0 auto;
+}
+.exito{
+    font-size: 20px;
+    text-align: center;
+    color: #2CBB73;
+    font-weight: 700;
+}
+.pt-1{
+    padding-top: 1rem!important;
+}
+.comprobante p{
+    line-height: 26px;
+    font-size: 14px;
+}
+.comprobante{
+    margin: 0 10px;
+    color: #616161;
+}
+.total{
+    height: 30px;
+    color: #359FDA;
+    font-size: 14px;
+}
+.text-left{
+    text-align: left;
+}
+.text-right{
+    text-align: right;
+}
+@media (min-width: 1264px) {
+    .w587{
+        width: 587px;
+        margin: 0px 2%!important;
+    }   
+}
