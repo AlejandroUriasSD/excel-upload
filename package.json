@@ -6,7 +6,11 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
+<<<<<<< HEAD
     "start": "node server.js"
+=======
+    "start": "npm run serve"
+>>>>>>> a695e97202af152987720bffe2887fa3b6092d49
   },
   "dependencies": {
     "alertify": "^0.3.0",
