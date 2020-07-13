@@ -40,7 +40,7 @@
 <template>
   <div style="height: 100vh" align="center" justify-xl="center">
     <v-card class="d-inline-block mt-50 margenLogin">
-      <v-container>
+      <v-container style="width:800px">
         <v-row>
           <v-col>
             <div>
@@ -51,6 +51,13 @@
         <v-row>
           <v-col class="px-5">
             <v-form ref="form" lazy-validation>
+              <v-btn
+                :loading="loading3"
+                v-bind:disabled="disabled"
+                color="blue-grey"
+                class="ma-2 white--text float-right"
+                @click="uploadFiles"
+              >Subir Archivos</v-btn>
               <v-tooltip top>
                 <template v-slot:activator="{ on, attrs }">
                   <v-file-input
@@ -59,24 +66,30 @@
                     v-bind="attrs"
                     v-on="on"
                     chips
-                    show-size
+                    outlined
+                    :show-size="1000"
                     v-model="files"
+                    @change="onChangeFileUpload"
+                    class="left"
+                    @click:clear="resetTemplate"
                   ></v-file-input>
                 </template>
                 <span>Solo archivos xlsx</span>
               </v-tooltip>
-
-              <v-icon>mdi-account_circle</v-icon>
-              <v-btn
-                :loading="loading3"
-                :disabled="loading3"
-                color="blue-grey"
-                class="ma-2 white--text"
-                @click="uploadFiles"
+              <v-data-table
+                :headers="headers"
+                :items="tableContent"
+                class="elevation-1"
+                :items-per-page="5"
               >
-                Subir
-                <v-icon right dark>mdi-cloud-upload</v-icon>
-              </v-btn>
+                <template v-slot:item.models="{item}">
+                  <v-select
+                    :items="modelTypes"
+                    label="Selecciona modelo"
+                    @change="onChangeDropdown(item.id, $event)"
+                  ></v-select>
+                </template>
+              </v-data-table>
             </v-form>
           </v-col>
         </v-row>
@@ -91,9 +104,24 @@ import { mapGetters } from "vuex";
 export default {
   data() {
     return {
+      disabled: true,
+      value: null,
+      id: null,
       loader: null,
       loading3: false,
-      files: null
+      files: null,
+      selected: [],
+      headers: [
+        {
+          text: "Nombre",
+          align: "start",
+          sortable: false,
+          value: "name"
+        },
+        { text: "Tipo de modelo", value: "models" }
+      ],
+      tableContent: [],
+      modelTypes: ["modelo1", "modelo2"]
     };
   },
   watch: {
@@ -108,33 +136,84 @@ export default {
   },
   methods: {
     uploadFiles() {
-      let globalContext = this;
-      console.log(this.infoUser);
+      let thisContext = this;
+      let formData = new FormData();
+      let helper = this.files.map(file => {
+        return { name: file.name, model: file.model };
+      });
+      this.files.forEach(file => {
+        formData.append("files", file);
+      });
+      formData.append("models", JSON.stringify(helper));
       uploadService
-        .uploadFile(this.files)
+        .uploadFile(formData)
         .then(res => {
           if (res) {
             if (res === "ok")
-              globalContext.$alertify.success("Archivo subido con exito");
+              thisContext.$alertify.success("Archivo subido con exito");
             else if (res.includes("Can't find end of central directory")) {
-              globalContext.$alertify.error(
+              thisContext.$alertify.error(
                 "Tipo de archivo no admitido, solo se admiten archivos xlsx"
               );
             } else
-              globalContext.$alertify.error(
+              thisContext.$alertify.error(
                 "Hubo un problema al subir su archivo, por favor revise el formato permitido"
               );
           }
         })
         .catch(err => {
           if (err.response.data.error === "jwt expired")
-            globalContext.$alertify.confirm(
+            thisContext.$alertify.confirm(
               "su sesion ha expirado, porfavor inicie sesion",
               () => {
-                globalContext.$router.push("/");
+                thisContext.$router.push("/");
               }
             );
         });
+    },
+    onChangeFileUpload() {
+      const thisContext = this;
+      thisContext.files.forEach((file, index) => {
+        var fileType = file.name.substring(
+          file.name.lastIndexOf(".") + 1,
+          file.name.length
+        );
+        console.log(index);
+        if (fileType !== "xls" && fileType !== "xlsx") {
+          delete thisContext.files[index];
+          thisContext.$alertify.error(
+            `El archivo numero: ${index + 1} no es admitido`
+          );
+        } else if (fileType === "xls" || fileType === "xlsx") {
+          this.tableContent.push({ name: file.name, id: index });
+        }
+      });
+
+      this.validateUpload();
+    },
+    onChangeDropdown(index, model) {
+      this.files[index].model = model;
+      this.validateUpload();
+    },
+    validateUpload() {
+      if (!this.files) {
+        this.disabled = true;
+      } else if (this.files.length > 0) {
+        this.files.forEach(file => {
+          if (!file.model) {
+            this.disabled = true;
+            return;
+          } else {
+            this.disabled = false;
+          }
+        });
+      } else {
+        this.disabled = true;
+      }
+    },
+    resetTemplate() {
+      this.tableContent = [];
+      this.validateUpload();
     }
   },
   computed: {

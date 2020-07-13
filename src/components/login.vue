@@ -112,7 +112,12 @@ export default {
       updateUserInfo: "uploadExcel/updateUserInfo"
     }),
     validar() {
-      if (this.user != null && this.pass != null) {
+      if (
+        this.user !== null &&
+        this.pass !== null &&
+        this.user !== "" &&
+        this.pass !== ""
+      ) {
         this.valid = true;
       } else {
         this.valid = false;
@@ -124,30 +129,27 @@ export default {
         .then(res => {
           if (res.status) {
             let datosUser = {
-              id:res.data.usuario.id,
+              id: res.data.usuario.id,
               name: res.data.usuario.name,
               email: res.data.usuario.email,
               token: res.data.usuario.token
-
             };
             this.updateUserInfo(datosUser);
-            sessionStorage.setItem('user-token', datosUser.token)
-            this.loading = false;
+            sessionStorage.setItem("user-token", datosUser.token);
             this.$router.push("cargaDeExcel");
           } else {
             this.alert = true;
-            this.loading = false;
           }
+          this.loading = false;
         })
         .catch(err => {
           this.loading = false;
-          this.status = true;
-          if (err == "Error: Network Error") {
-            this.error = "No hay conexión con servidor";
-          } else if (err == "Error: Request failed with status code 404") {
-            this.error = "Usuario o contraseña incorrecto";
+          if (err.message === "Network Error") {
+            this.$alertify.error("No hay conexión con el servidor");
+          } else if (err.response.status === 400) {
+            this.$alertify.error("Usuario o contraseña incorrecto");
           } else {
-            this.error = err;
+            this.$alertify.error(err.response.err);
           }
         });
     }

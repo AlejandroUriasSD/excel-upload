@@ -1,5 +1,5 @@
 let config = {
-    BASEURL: process.env.BASEURL || 'https://b3401d2559c1.ngrok.io',
+    BASEURL: process.env.BASEURL || 'http://localhost:3000',
 }
 
 export default config

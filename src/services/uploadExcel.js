@@ -6,12 +6,8 @@ let config = {
     }
 }
 
-service.uploadFile = function (files) {
-    let formData = new FormData();
+service.uploadFile = function (formData) {
     config.headers.Authorization = sessionStorage.getItem("user-token");
-    files.forEach(file=>{
-        formData.append('files', file)
-    });
     return api.post('api/post', formData, config).then(res => res.data)
 }
 

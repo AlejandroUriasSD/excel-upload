@@ -8,6 +8,7 @@ import '@/assets/css/saluddigna.min.css'
 import store from '@/state/store'
 import VueAlertify from './plugins/alertify'
 
+
 Vue.use(VueAlertify);
 
 
