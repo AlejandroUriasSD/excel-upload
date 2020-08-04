@@ -116,12 +116,17 @@ export default {
           text: "Nombre",
           align: "start",
           sortable: false,
-          value: "name"
+          value: "name",
         },
-        { text: "Tipo de modelo", value: "models" }
+        { text: "Tipo de modelo", value: "models" },
       ],
       tableContent: [],
-      modelTypes: ["modelo1", "modelo2"]
+      modelTypes: [
+        "covid_resultado_indeterminado",
+        "universidad_notif_curso_colaborador_5",
+        "covid_demora_resultados3",
+        "sk_notif_benef_campa1"
+      ],
     };
   },
   watch: {
@@ -132,22 +137,22 @@ export default {
       setTimeout(() => (this[l] = false), 3000);
 
       this.loader = null;
-    }
+    },
   },
   methods: {
     uploadFiles() {
       let thisContext = this;
       let formData = new FormData();
-      let helper = this.files.map(file => {
+      let helper = this.files.map((file) => {
         return { name: file.name, model: file.model };
       });
-      this.files.forEach(file => {
+      this.files.forEach((file) => {
         formData.append("files", file);
       });
       formData.append("models", JSON.stringify(helper));
       uploadService
         .uploadFile(formData)
-        .then(res => {
+        .then((res) => {
           if (res) {
             if (res === "ok")
               thisContext.$alertify.success("Archivo subido con exito");
@@ -161,7 +166,7 @@ export default {
               );
           }
         })
-        .catch(err => {
+        .catch((err) => {
           if (err.response.data.error === "jwt expired")
             thisContext.$alertify.confirm(
               "su sesion ha expirado, porfavor inicie sesion",
@@ -199,7 +204,7 @@ export default {
       if (!this.files) {
         this.disabled = true;
       } else if (this.files.length > 0) {
-        this.files.forEach(file => {
+        this.files.forEach((file) => {
           if (!file.model) {
             this.disabled = true;
             return;
@@ -214,12 +219,12 @@ export default {
     resetTemplate() {
       this.tableContent = [];
       this.validateUpload();
-    }
+    },
   },
   computed: {
     ...mapGetters({
-      infoUser: "uploadExcel/getInfoUser"
-    })
-  }
+      infoUser: "uploadExcel/getInfoUser",
+    }),
+  },
 };
 </script>
