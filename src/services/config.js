@@ -1,5 +1,5 @@
 let config = {
-    BASEURL: process.env.BASEURL || 'http://localhost:3000',
+    BASEURL: process.env.BASEURL || 'https://excel-dynamic.herokuapp.com/',
 }
 
 export default config

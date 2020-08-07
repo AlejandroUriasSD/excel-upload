@@ -125,7 +125,8 @@ export default {
         "covid_resultado_indeterminado",
         "universidad_notif_curso_colaborador_5",
         "covid_demora_resultados3",
-        "sk_notif_benef_campa1"
+        "sk_notif_benef_campa1",
+        "univ_notif_curso_rh_1"
       ],
     };
   },
